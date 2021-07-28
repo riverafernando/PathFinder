@@ -133,8 +133,7 @@ public class Screen extends JPanel implements Runnable{
     
     // Runs BFS for shortest path if edges weight are all equal in cost
     public void bfs()
-    {
-    	
+    {    	
     	Queue<Vertex> q = new LinkedList<>();	
     	visited[sourceID] = true;    	
     	q.add(new Vertex(sourceID, -1, prevSourceID));
@@ -153,8 +152,7 @@ public class Screen extends JPanel implements Runnable{
     			Vertex temp = v;
     			ArrayList<Integer> buff = new ArrayList<>();
     			while(temp.id != sourceID)
-    			{
-    				
+    			{    				
     				buff.add(temp.id);
     				temp = pathRecovery.get(temp.prev);
     			}
@@ -174,10 +172,9 @@ public class Screen extends JPanel implements Runnable{
     			Vertex temp = v;
     			ArrayList<Integer> buff = new ArrayList<>();
     			while(temp.id != sourceID)
-    			{
-    				
-    				buff.add(temp.id);
-    				temp = pathRecovery.get(temp.prev);
+    			{    				
+					buff.add(temp.id);
+					temp = pathRecovery.get(temp.prev);
     			}
     			
     			sourceID = v.id;
@@ -189,10 +186,8 @@ public class Screen extends JPanel implements Runnable{
     			Arrays.fill(visited, false);
     			repaint();
     			visited[startNode] = true;
-    			
     			bfs();
     			return;
-    			
     		}
     		
     		visited[v.id] = true;
@@ -230,7 +225,6 @@ public class Screen extends JPanel implements Runnable{
 		N = (HEIGHT / BOX_SIZE) * (WIDTH / BOX_SIZE);		
 		matrix = new int [N][N];
         
-	
         // Turn screen grid into adjacency matrix representation
 		for (int r = 0; r < N; r++)
 		{
@@ -306,7 +300,6 @@ public class Screen extends JPanel implements Runnable{
     		}
     	}    	
     	
-    	
     	// Paint RecoveryPath  	
 		if(!running) 
     	{
@@ -360,7 +353,6 @@ public class Screen extends JPanel implements Runnable{
     		g.setColor(Color.red);
     		g.fillRect(endBlockY, endBlockX, BOX_SIZE, BOX_SIZE);
     	}
-    	
     }
     
     public void start()
@@ -374,15 +366,11 @@ public class Screen extends JPanel implements Runnable{
     {
     	running = false;
     	repaint();
-    	try {
-    		
-			thread.join();
-			
+    	try {    		
+			thread.join();			
 		} catch (InterruptedException e) {
-			
 			e.printStackTrace();
 		}
-    	
     	System.exit(1);
     }
    
@@ -430,7 +418,6 @@ public class Screen extends JPanel implements Runnable{
     	    	if(!obstacles.contains(sourceID))    	    		
     	    		sourceBlock = true;
     	    	
-    	    	
 	    	}
 	    	else if (!endBlock && SwingUtilities.isLeftMouseButton(e) && keyPressed == KeyEvent.VK_E)
 	    	{
@@ -453,8 +440,7 @@ public class Screen extends JPanel implements Runnable{
 		public void mouseDragged(MouseEvent e) {			
 			
 			if (SwingUtilities.isRightMouseButton(e) && !noMoreObstacles) 
-			{
-				
+			{				
 				int row = e.getY()/BOX_SIZE;
 	    		int col = e.getX()/BOX_SIZE;	    		
 	    		int id = (row*numCols) + col;
