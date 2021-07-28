@@ -15,7 +15,7 @@ Implemented Djikstra’s algorithm as the path finding algorithm that supports a
 -- !PathFinder(djikstra).jar --
  - Djikstra's algorithm implementation to find shortest path
  - Controls
-        - Left Click & S_key = Place start block
-        - Left Click & E_key = Place End Block
+        - Left Click & S_key = Place start block\n
+        - Left Click & E_key = Place End Block\n
         - Right Click & Drag = Draw obstacles to be evaded my search algorithm (Must be placed before start and end blocks)
-        - Left Clo=ick & T_key = Place Token to be collected during search algorithm (Must be placed before start and end blocks)
+        - Left Click & T_key = Place Token to be collected during search algorithm (Must be placed before start and end blocks)
