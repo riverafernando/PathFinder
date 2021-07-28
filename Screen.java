@@ -62,14 +62,14 @@ public class Screen extends JPanel implements Runnable{
     {
     	
     	mouseAndKey = new MouseAndKey();
-		addKeyListener(mouseAndKey);
-		addMouseMotionListener(mouseAndKey);
-		addMouseListener(mouseAndKey);		
+	addKeyListener(mouseAndKey);
+	addMouseMotionListener(mouseAndKey);
+	addMouseListener(mouseAndKey);		
         setFocusable(true);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		numRows = (HEIGHT / BOX_SIZE);
+	setPreferredSize(new Dimension(WIDTH, HEIGHT));
+	numRows = (HEIGHT / BOX_SIZE);
         numCols = (WIDTH / BOX_SIZE);
-		start();
+	start();
 
     }
    
@@ -95,11 +95,11 @@ public class Screen extends JPanel implements Runnable{
     		repaint();
     		
     		// Delay to visualize
-			try {
-				Thread.sleep(1);
-			} catch ( Exception e){
-				Thread.currentThread().interrupt();
-			}
+		try {
+			Thread.sleep(1);
+		} catch ( Exception e){
+			Thread.currentThread().interrupt();
+		}
     		
     		for(int i = 0; i < N; i++)    		    			
     			if (matrix[v.id][i] > 0 && dist[v.id] + matrix[v.id][i] < dist[i])
@@ -114,20 +114,20 @@ public class Screen extends JPanel implements Runnable{
     	}
     	
     	// Recover the shortest path and save it
-		Vertex temp = pathRecovery.get(endID);
-		ArrayList<Integer> buffer = new ArrayList<>();
-		
-		while(temp.id != sourceID)
-		{
-			buffer.add(temp.id);
-			temp = pathRecovery.get(temp.prev);
-		}
+	Vertex temp = pathRecovery.get(endID);
+	ArrayList<Integer> buffer = new ArrayList<>();
+
+	while(temp.id != sourceID)
+	{
 		buffer.add(temp.id);
-		
-		for(int i = 0; i < buffer.size(); i++)
-			realPath.add(buffer.get(i));
-		
-		stop();
+		temp = pathRecovery.get(temp.prev);
+	}
+	buffer.add(temp.id);
+
+	for(int i = 0; i < buffer.size(); i++)
+		realPath.add(buffer.get(i));
+
+	stop();
 		
     }
     
@@ -194,11 +194,11 @@ public class Screen extends JPanel implements Runnable{
     		repaint();
     		
     		// Delay to visualize
-			try {
-				Thread.sleep(1);
-			} catch ( Exception e) {
-				Thread.currentThread().interrupt();
-			}
+		try {
+			Thread.sleep(1);
+		} catch ( Exception e) {
+			Thread.currentThread().interrupt();
+		}
     		
     		for(int i = 0; i < N; i++) 
     		{   			
@@ -226,44 +226,44 @@ public class Screen extends JPanel implements Runnable{
 		matrix = new int [N][N];
         
         // Turn screen grid into adjacency matrix representation
-		for (int r = 0; r < N; r++)
-		{
-			int right = r + 1;
-			int down = r + numCols;
-			int up = r - numCols;
-			int left = r - 1;			
-			
-			// Initializes path weights
-			if (right < N && right % numCols != 0 && !obstacles.contains(right))
-				matrix[r][right] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
-			
-			if (down < N && !obstacles.contains(down))
-				matrix[r][down] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
+	for (int r = 0; r < N; r++)
+	{
+		int right = r + 1;
+		int down = r + numCols;
+		int up = r - numCols;
+		int left = r - 1;			
+
+		// Initializes path weights
+		if (right < N && right % numCols != 0 && !obstacles.contains(right))
+			matrix[r][right] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
+
+		if (down < N && !obstacles.contains(down))
+			matrix[r][down] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
+
+		if (left >= 0 && r % numCols != 0 && !obstacles.contains(left))
+			matrix[r][left] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
+
+		if (up >= 0 && !obstacles.contains(up))
+			matrix[r][up] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;
+	}
 		
-			if (left >= 0 && r % numCols != 0 && !obstacles.contains(left))
-				matrix[r][left] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;			
-			
-			if (up >= 0 && !obstacles.contains(up))
-				matrix[r][up] = DJIKSTRA ? (int)(Math.random() * 50 + 1) : 1;;
-		}
-		
-		// If Vertex is obstacle remove its adjacent vertices
-		for (int i = 0; i < N; i++)
-			if (obstacles.contains(i))
-				Arrays.fill(matrix[i], 0);
-				
-		// Initialize
-		pathRecovery = new ArrayList<>(N);
+	// If Vertex is obstacle remove its adjacent vertices
+	for (int i = 0; i < N; i++)
+		if (obstacles.contains(i))
+			Arrays.fill(matrix[i], 0);
+
+	// Initialize
+	pathRecovery = new ArrayList<>(N);
     	for(int i = 0; i < N; i++)
     		pathRecovery.add(null);	
-		prevSourceID = sourceID;
-		visited = new boolean[N];
-		visitedTokens = tokens.size();
-		
-		if(DJIKSTRA)
-			runDjikstra();
-		else
-			bfs();
+	prevSourceID = sourceID;
+	visited = new boolean[N];
+	visitedTokens = tokens.size();
+
+	if(DJIKSTRA)
+		runDjikstra();
+	else
+		bfs();
 
     }
    
@@ -272,13 +272,13 @@ public class Screen extends JPanel implements Runnable{
     {
     	// Paint Grid
     	g.clearRect(0, 0, WIDTH, HEIGHT);
-		g.setColor(new Color(200,230,200));    		
-		g.setColor(Color.black);
-		
-		for (int i = 0; i < WIDTH/BOX_SIZE; i++)
-			g.drawLine(i * BOX_SIZE, 0, i * BOX_SIZE, HEIGHT);
-		for (int i = 0; i < HEIGHT/BOX_SIZE; i++)
-			g.drawLine(0, i*BOX_SIZE, HEIGHT, i*BOX_SIZE);   		
+	g.setColor(new Color(200,230,200));    		
+	g.setColor(Color.black);
+
+	for (int i = 0; i < WIDTH/BOX_SIZE; i++)
+		g.drawLine(i * BOX_SIZE, 0, i * BOX_SIZE, HEIGHT);
+	for (int i = 0; i < HEIGHT/BOX_SIZE; i++)
+		g.drawLine(0, i*BOX_SIZE, HEIGHT, i*BOX_SIZE);   		
     		
     		
     	// Paint the Visited Blocks
@@ -301,49 +301,49 @@ public class Screen extends JPanel implements Runnable{
     	}    	
     	
     	// Paint RecoveryPath  	
-		if(!running) 
-    	{
-			int curr;				
-			for(int i = realPath.size()-1; i >= 0; i--)	
-			{
-				curr = realPath.get(i);				
-				int rowV = curr % numCols;
-				int colV = (curr / numRows);
-				g.setColor(Color.black);
-				g.drawRect(rowV*BOX_SIZE, colV*BOX_SIZE, BOX_SIZE, BOX_SIZE);
-				g.setColor(new Color(180, 100, 180));
-				g.fillRect(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);
-				
-			}
-				
-		}	
+	if(!running) 
+	{
+		int curr;				
+		for(int i = realPath.size()-1; i >= 0; i--)	
+		{
+			curr = realPath.get(i);				
+			int rowV = curr % numCols;
+			int colV = (curr / numRows);
+			g.setColor(Color.black);
+			g.drawRect(rowV*BOX_SIZE, colV*BOX_SIZE, BOX_SIZE, BOX_SIZE);
+			g.setColor(new Color(180, 100, 180));
+			g.fillRect(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);
+
+		}
+
+	}	
     		
     	// Paint Obstacles & Tokens    	
-		for(Integer k : obstacles)
-		{
-			int rowV = k % numCols;
-			int colV = (k / numRows);
-			g.setColor(Color.black);
-			g.drawRect(rowV*BOX_SIZE, colV*BOX_SIZE, 11, 11);
-			g.setColor(Color.green);
-			g.fillRect(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);
-		}
-		
-		for(Integer k : tokens.keySet())
-		{
-			int rowV = k % numCols;
-			int colV = (k / numRows);
-			g.setColor(Color.orange);
-			g.drawOval(rowV*BOX_SIZE, colV*BOX_SIZE, BOX_SIZE, BOX_SIZE);
-			g.setColor(Color.yellow);
-			g.fillOval(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);				
-			g.setColor(Color.orange);
-			g.fillOval(rowV*BOX_SIZE+3, colV*BOX_SIZE+3, 5, 5);
-			
-		}
+	for(Integer k : obstacles)
+	{
+		int rowV = k % numCols;
+		int colV = (k / numRows);
+		g.setColor(Color.black);
+		g.drawRect(rowV*BOX_SIZE, colV*BOX_SIZE, 11, 11);
+		g.setColor(Color.green);
+		g.fillRect(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);
+	}
+
+	for(Integer k : tokens.keySet())
+	{
+		int rowV = k % numCols;
+		int colV = (k / numRows);
+		g.setColor(Color.orange);
+		g.drawOval(rowV*BOX_SIZE, colV*BOX_SIZE, BOX_SIZE, BOX_SIZE);
+		g.setColor(Color.yellow);
+		g.fillOval(rowV*BOX_SIZE+1, colV*BOX_SIZE+1, 9, 9);				
+		g.setColor(Color.orange);
+		g.fillOval(rowV*BOX_SIZE+3, colV*BOX_SIZE+3, 5, 5);
+
+	}
     		
     	// Paint & maintain start and end blocks
-		if(sourceBlock) 
+	if(sourceBlock) 
     	{
     		g.setColor(Color.blue);  		
     		g.fillRect(sourceBlockY, sourceBlockX, BOX_SIZE, BOX_SIZE);   		
@@ -367,17 +367,17 @@ public class Screen extends JPanel implements Runnable{
     	running = false;
     	repaint();
     	try {    		
-			thread.join();			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		thread.join();			
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
     	System.exit(1);
     }
    
     public void run()
     {    	
-		tick();
-		stop();
+	tick();
+	stop();
     }
     
  
@@ -408,79 +408,79 @@ public class Screen extends JPanel implements Runnable{
 	    	{
 	    		System.out.println("herer");
 	    		sourceBlockX = e.getY();
-    	    	sourceBlockY = e.getX();
-    	    	sourceBlockX = sourceBlockX/BOX_SIZE * BOX_SIZE;
-    	    	sourceBlockY = sourceBlockY/BOX_SIZE * BOX_SIZE;
-    	    	
-    	    	sourceID = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;    	   
-    	    	startNode = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;  
-    	        
-    	    	if(!obstacles.contains(sourceID))    	    		
-    	    		sourceBlock = true;
+			sourceBlockY = e.getX();
+			sourceBlockX = sourceBlockX/BOX_SIZE * BOX_SIZE;
+			sourceBlockY = sourceBlockY/BOX_SIZE * BOX_SIZE;
+
+			sourceID = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;    	   
+			startNode = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;  
+
+			if(!obstacles.contains(sourceID))    	    		
+				sourceBlock = true;
     	    	
 	    	}
 	    	else if (!endBlock && SwingUtilities.isLeftMouseButton(e) && keyPressed == KeyEvent.VK_E)
 	    	{
-	    		endBlockX = e.getY();
-    	    	endBlockY = e.getX();
-    	    	endBlockX = endBlockX/BOX_SIZE * BOX_SIZE;
-    	    	endBlockY = endBlockY/BOX_SIZE * BOX_SIZE;    	    	
-    	    	endID = (endBlockX/BOX_SIZE * numCols) + endBlockY/BOX_SIZE;
-    	    	
-    	    	if (!obstacles.contains(endID)) 
-    	    	{
-    	    		endBlock = true;
-    	    		noMoreObstacles = true;
-    	    	}    	    		
+			endBlockX = e.getY();
+			endBlockY = e.getX();
+			endBlockX = endBlockX/BOX_SIZE * BOX_SIZE;
+			endBlockY = endBlockY/BOX_SIZE * BOX_SIZE;    	    	
+			endID = (endBlockX/BOX_SIZE * numCols) + endBlockY/BOX_SIZE;
+
+			if (!obstacles.contains(endID)) 
+			{
+				endBlock = true;
+				noMoreObstacles = true;
+			}    	    		
 	    	}
 	    }	  
 
 
-		@Override
-		public void mouseDragged(MouseEvent e) {			
-			
-			if (SwingUtilities.isRightMouseButton(e) && !noMoreObstacles) 
-			{				
-				int row = e.getY()/BOX_SIZE;
-	    		int col = e.getX()/BOX_SIZE;	    		
-	    		int id = (row*numCols) + col;
-	    		obstacles.add(id);   	
-			}
-			
+	@Override
+	public void mouseDragged(MouseEvent e) {			
+
+		if (SwingUtilities.isRightMouseButton(e) && !noMoreObstacles) 
+		{				
+			int row = e.getY()/BOX_SIZE;
+		int col = e.getX()/BOX_SIZE;	    		
+		int id = (row*numCols) + col;
+		obstacles.add(id);   	
 		}
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			
-			keyPressed = e.getKeyCode();
-		}
+	}
 
-		@Override
-		public void keyReleased(KeyEvent e) {}
+	@Override
+	public void keyPressed(KeyEvent e) {
 
+		keyPressed = e.getKeyCode();
+	}
 
-		@Override
-		public void keyTyped(KeyEvent e) {}
+	@Override
+	public void keyReleased(KeyEvent e) {}
 
 
-		@Override
-		public void mouseMoved(MouseEvent e) {}
+	@Override
+	public void keyTyped(KeyEvent e) {}
 
 
-		@Override
-		public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseMoved(MouseEvent e) {}
 
 
-		@Override
-		public void mouseReleased(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
 
 
-		@Override
-		public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 
 
-		@Override
-		public void mouseExited(MouseEvent e) {}	
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {}	
 
     }
     
