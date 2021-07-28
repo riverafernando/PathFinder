@@ -7,9 +7,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
-
 import javax.swing.SwingUtilities;
-
 import javax.swing.JPanel;
 import java.util.*;
 
@@ -78,15 +76,15 @@ public class Screen extends JPanel implements Runnable{
     {
     	
     	int [] dist = new int[N];
-		Arrays.fill(dist, oo);
-		dist[sourceID] = 0;
-		PriorityQueue<Vertex> minheap = new PriorityQueue<>();	
-		minheap.add(new Vertex(sourceID, dist[sourceID], sourceID));
-		pathRecovery.set(sourceID, (new Vertex(sourceID, dist[sourceID], sourceID)));
+	Arrays.fill(dist, oo);
+	dist[sourceID] = 0;
+	PriorityQueue<Vertex> minheap = new PriorityQueue<>();	
+	minheap.add(new Vertex(sourceID, dist[sourceID], sourceID));
+	pathRecovery.set(sourceID, (new Vertex(sourceID, dist[sourceID], sourceID)));
     	
     	while(!minheap.isEmpty())
     	{
-    		 Vertex v = minheap.remove();
+    		Vertex v = minheap.remove();
     		 
     		if(obstacles.contains(v.id))
     			continue;
@@ -222,8 +220,8 @@ public class Screen extends JPanel implements Runnable{
     	while (!sourceBlock || !endBlock)
         	repaint();        	
 				 	
-		N = (HEIGHT / BOX_SIZE) * (WIDTH / BOX_SIZE);		
-		matrix = new int [N][N];
+	N = (HEIGHT / BOX_SIZE) * (WIDTH / BOX_SIZE);		
+	matrix = new int [N][N];
         
         // Turn screen grid into adjacency matrix representation
 	for (int r = 0; r < N; r++)
@@ -442,9 +440,9 @@ public class Screen extends JPanel implements Runnable{
 		if (SwingUtilities.isRightMouseButton(e) && !noMoreObstacles) 
 		{				
 			int row = e.getY()/BOX_SIZE;
-		int col = e.getX()/BOX_SIZE;	    		
-		int id = (row*numCols) + col;
-		obstacles.add(id);   	
+			int col = e.getX()/BOX_SIZE;	    		
+			int id = (row*numCols) + col;
+			obstacles.add(id);   	
 		}
 
 	}
