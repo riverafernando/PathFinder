@@ -58,7 +58,6 @@ public class Screen extends JPanel implements Runnable{
 	
     Screen()
     {
-    	
     	mouseAndKey = new MouseAndKey();
 	addKeyListener(mouseAndKey);
 	addMouseMotionListener(mouseAndKey);
@@ -68,13 +67,11 @@ public class Screen extends JPanel implements Runnable{
 	numRows = (HEIGHT / BOX_SIZE);
         numCols = (WIDTH / BOX_SIZE);
 	start();
-
     }
    
     // Runs djikstra's shortest path algorithm
     public void runDjikstra()
     {
-    	
     	int [] dist = new int[N];
 	Arrays.fill(dist, oo);
 	dist[sourceID] = 0;
@@ -104,8 +101,10 @@ public class Screen extends JPanel implements Runnable{
 				{
 					dist[i] = dist[v.id] + matrix[v.id][i];
 					minheap.add(new Vertex(i, dist[i], v.id));
+				
 					if(pathRecovery.get(i) != null)
 						continue;
+				
 					pathRecovery.set(i, new Vertex(i, dist[i], v.id));
 				}
     		
@@ -120,6 +119,7 @@ public class Screen extends JPanel implements Runnable{
 		buffer.add(temp.id);
 		temp = pathRecovery.get(temp.prev);
 	}
+	    
 	buffer.add(temp.id);
 
 	for(int i = 0; i < buffer.size(); i++)
@@ -149,6 +149,7 @@ public class Screen extends JPanel implements Runnable{
     			
     			Vertex temp = v;
     			ArrayList<Integer> buff = new ArrayList<>();
+			
     			while(temp.id != sourceID)
     			{    				
     				buff.add(temp.id);
@@ -156,19 +157,17 @@ public class Screen extends JPanel implements Runnable{
     			}
     			buff.add(temp.id);
     			for(int i = 0; i <buff.size(); i++)
-    				realPath.add(buff.get(i));
-    			
+    				realPath.add(buff.get(i));    			
     			stop();
     			
     		}
     		if(tokens.containsKey(v.id) && !tokens.get(v.id))
     		{
-    			
     			visitedTokens--;
-    			tokens.put(v.id, true);
-    			
+    			tokens.put(v.id, true);    			
     			Vertex temp = v;
     			ArrayList<Integer> buff = new ArrayList<>();
+			
     			while(temp.id != sourceID)
     			{    				
 					buff.add(temp.id);
@@ -384,32 +383,28 @@ public class Screen extends JPanel implements Runnable{
     {
     	int keyPressed = 0;  
     	
-    	@Override
+    	    @Override
 	    public void mouseClicked(MouseEvent e) {
 	    	
-    		System.out.println("herer");
 	    	if (keyPressed == KeyEvent.VK_T && SwingUtilities.isLeftMouseButton(e) )
 	    	{	    		
-    			System.out.println("added token");
     			int row = e.getY()/BOX_SIZE;
 	    		int col = e.getX()/BOX_SIZE;	    		
 	    		int id = (row*numCols) + col;
+			
 	    		if(!obstacles.contains(id))
 	    			tokens.put(id, false);   
     		
 	    		repaint();
-	    		keyPressed = 0; 
 	    		
 	    	}
 	    	
 	    	else if (!sourceBlock && SwingUtilities.isLeftMouseButton(e) && keyPressed == KeyEvent.VK_S)
 	    	{
-	    		System.out.println("herer");
 	    		sourceBlockX = e.getY();
 			sourceBlockY = e.getX();
 			sourceBlockX = sourceBlockX/BOX_SIZE * BOX_SIZE;
 			sourceBlockY = sourceBlockY/BOX_SIZE * BOX_SIZE;
-
 			sourceID = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;    	   
 			startNode = (sourceBlockX/BOX_SIZE * numCols) + sourceBlockY/BOX_SIZE;  
 
