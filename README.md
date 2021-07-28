@@ -7,15 +7,15 @@ Implemented Djikstra’s algorithm as the path finding algorithm that supports a
 -- !PathFinder(bfs).jar --
  - Bread First Search algorithm implementation to find shortest path
  - Controls:
-        Left Click & S_key = Place start block
-        Left Click & E_key = Place End Block
-        Right Click & Drag = Draw obstacles to be evaded my search algorithm (Must be placed before start and end blocks)
+        - Left Click & S_key = Place start block
+        - Left Click & E_key = Place End Block
+        - Right Click & Drag = Draw obstacles to be evaded my search algorithm (Must be placed before start and end blocks)
         
         
 -- !PathFinder(djikstra).jar --
  - Djikstra's algorithm implementation to find shortest path
  - Controls:
-        Left Click & S_key = Place start block
-        Left Click & E_key = Place End Block
-        Right Click & Drag = Draw obstacles to be evaded my search algorithm (Must be placed before start and end blocks)
-        Left Clo=ick & T_key = Place Token to be collected during search algorithm (Must be placed before start and end blocks)
+        - Left Click & S_key = Place start block
+        - Left Click & E_key = Place End Block
+        - Right Click & Drag = Draw obstacles to be evaded my search algorithm (Must be placed before start and end blocks)
+        - Left Clo=ick & T_key = Place Token to be collected during search algorithm (Must be placed before start and end blocks)
